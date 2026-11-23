@@ -1,6 +1,21 @@
-// When ready, use the code below for testing
-console.log(animal.speak()); // Outputs: Generic animal sound
-console.log(dog.speak()); // Outputs: Woof!
+// Exercise 2: Prototypal Inheritance with Object.create
+// Create `dog` with `animal` as its prototype, then override speak().
 
-// Inheritance
-console.log(Object.getPrototypeOf(dog) === animal); // Outputs: true
+const animal = {
+  speak: function () {
+    return "Generic animal sound";
+  },
+};
+
+const dog = Object.create(animal);
+
+dog.speak = function () {
+  return "Woof!";
+};
+
+// Testing
+console.log(animal.speak()); // Generic animal sound
+console.log(dog.speak()); // Woof!
+
+// Inheritance check
+console.log(Object.getPrototypeOf(dog) === animal); // true

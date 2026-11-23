@@ -1,14 +1,30 @@
-// When ready, use the code below for testing
-console.log(person.getFullName()); // Outputs: John Doe
+// Exercise 1: Advanced Object Creation and Property Manipulation
+// Create `person`, then add a getFullName method that cannot be
+// changed, deleted, or enumerated - without modifying the original literal.
 
-// Verifying property attributes
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+};
+
+Object.defineProperty(person, "getFullName", {
+  value: function () {
+    return `${this.firstName} ${this.lastName}`;
+  },
+  writable: false,
+  configurable: false,
+  enumerable: false,
+});
+
+// Testing
+console.log(person.getFullName()); // John Doe
+
 person.getFullName = function () {
   return "Modified";
-}; // Does not change
-delete person.getFullName; // Cannot delete
-console.log(person.getFullName()); // Still outputs: John Doe
+}; // Does not change (non-writable)
+delete person.getFullName; // Cannot delete (non-configurable)
+console.log(person.getFullName()); // Still: John Doe
 
-// Enumerating properties
 for (let key in person) {
-  console.log(key); // Outputs: firstName, lastName (getFullName is non-enumerable)
+  console.log(key); // firstName, lastName only (getFullName is non-enumerable)
 }
